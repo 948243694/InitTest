@@ -1,0 +1,1372 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+<meta name="wpd_version" content="0.2">
+<meta name="wpd_baseurl" content="http://www.runoob.com/java/java-files-io.html">
+<meta name="wpd_url" content="http://www.runoob.com/java/java-files-io.html">
+<meta name="wpd_date" content="2017-10-30T08:54Z">
+
+	
+  <meta property="qc:admins" content="465267610762567726375">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Java 流(Stream)、文件(File)和IO | 菜鸟教程</title>
+
+  <link rel="dns-prefetch" href="http://s.w.org/">
+<link rel="canonical" href="http://www.runoob.com/java/java-files-io.html">
+<meta name="keywords" content="Java 流(Stream)、文件(File)和IO">
+<meta name="description" content="Java 流(Stream)、文件(File)和IO Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。 Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。 一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。 Java 为 I/O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。 但本节讲述最基本的和流与 I/..">
+		
+	<link rel="shortcut icon" href="favicon.ico" mce_href="//static.runoob.com/images/favicon.ico" type="image/x-icon">
+		
+		
+  <!--[if gte IE 9]><!-->
+  <script src="hm.js"></script><script src="hm.js"></script><script src="ca-pub-5751451760833794.js"></script><script src="jquery.min.js"></script>
+  <!--<![endif]-->
+  <!--[if lt IE 9]>
+     <script src="//cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+     <script src="//cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+  <link rel="apple-touch-icon" href="http://static.runoob.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.runoob.com" as="script"><script type="text/javascript" src="integrator.js"></script><link href="https://adservice.google.com/adsid/integrator.js?domain=www.runoob.com" rel="preload"><script src="integrator.js" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="java-files-io.css" media="all">
+</head>
+<body style="">
+
+<!--  头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="http://www.runoob.com/java/index.php">
+      <input class="placeholder" value="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="http://www.runoob.com/">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+        <div class="col right-list"> 
+    <button class="btn btn-responsive-nav btn-inverse" data-toggle="collapse" data-target=".nav-main-collapse" id="pull" style=""> <i class="fa fa-navicon"></i> </button>
+    </div>
+        <div class="col search search-desktop last">
+      <form action="http://www.runoob.com/" target="_blank">
+        <input class="placeholder" id="s" name="s" value="搜索……" autocomplete="off">
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- 导航栏 -->
+<!-- 导航栏 -->
+<div class="container navigation">
+	<div class="row">
+		<div class="col nav">
+			<ul class="pc-nav">
+				<li><a href="http://www.runoob.com/">首页</a></li>
+				<li><a href="http://www.runoob.com/html/html-tutorial.html">HTML</a></li>
+				<li><a href="http://www.runoob.com/css/css-tutorial.html">CSS</a></li>
+				<li><a href="http://www.runoob.com/js/js-tutorial.html">JavaScript</a></li>
+				<li><a href="http://www.runoob.com/jquery/jquery-tutorial.html">jQuery</a></li>
+				<li><a href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html">Bootstrap</a></li>
+				<li><a href="http://www.runoob.com/sql/sql-tutorial.html">SQL</a></li>
+				<li><a href="http://www.runoob.com/mysql/mysql-tutorial.html">MySQL</a></li>
+				<li><a href="http://www.runoob.com/php/php-tutorial.html">PHP</a></li>
+				<li><a href="http://www.runoob.com/python/python-tutorial.html">Python2</a></li>
+				<li><a href="http://www.runoob.com/python3/python3-tutorial.html">Python3</a></li>
+				<li><a href="http://www.runoob.com/cprogramming/c-tutorial.html">C</a></li>
+				<li><a href="http://www.runoob.com/cplusplus/cpp-tutorial.html">C++</a></li>
+				<li><a href="http://www.runoob.com/csharp/csharp-tutorial.html">C#</a></li>
+				<li><a href="http://www.runoob.com/java/java-tutorial.html">Java</a></li>
+				<li><a href="http://www.runoob.com/sitemap">更多……</a></li>
+				<!--
+				<li><a href="javascript:;" class="runoob-pop">登录</a></li>
+				-->
+      		</ul>
+			<ul class="mobile-nav">
+				<li><a href="http://www.runoob.com/">首页</a></li>
+				<li><a href="http://www.runoob.com/html/html-tutorial.html">HTML</a></li>
+				<li><a href="http://www.runoob.com/css/css-tutorial.html">CSS</a></li>
+				<li><a href="http://www.runoob.com/js/js-tutorial.html">JavaScript</a></li>
+				<a href="javascript:void(0)" class="search-reveal">Search</a> 
+			</ul>
+			
+		</div>
+	</div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="col left-column">
+	<div class="tab">Java 教程	<a data-cate="53" href="javascript:void(0);" title="夜间模式" id="moon"><i class="fa fa-moon-o" aria-hidden="true" style="font-size: 1.4em; float: right; margin: 4px 6px 0px;"></i></a>
+	<a data-cate="53" style="display: none;" href="javascript:void(0);" title="日间模式" id="sun"><i class="fa fa-sun-o" aria-hidden="true" style="font-size: 1.4em; float: right; margin: 4px 6px 0px;"></i></a>
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" title="Java 教程" href="http://www.runoob.com/java/java-tutorial.html">
+
+			Java 教程			</a>
+						<a target="_top" title="Java 简介" href="http://www.runoob.com/java/java-intro.html">
+
+			Java 简介			</a>
+						<a target="_top" title="Java 开发环境配置" href="http://www.runoob.com/java/java-environment-setup.html">
+
+			Java 开发环境配置			</a>
+						<a target="_top" title="Java 基础语法" href="http://www.runoob.com/java/java-basic-syntax.html">
+
+			Java 基础语法			</a>
+						<a target="_top" title="Java 对象和类" href="http://www.runoob.com/java/java-object-classes.html">
+
+			Java 对象和类			</a>
+						<a target="_top" title="Java 基本数据类型" href="http://www.runoob.com/java/java-basic-datatypes.html">
+
+			Java 基本数据类型			</a>
+						<a target="_top" title="Java 变量类型" href="http://www.runoob.com/java/java-variable-types.html">
+
+			Java 变量类型			</a>
+						<a target="_top" title="Java 修饰符" href="http://www.runoob.com/java/java-modifier-types.html">
+
+			Java 修饰符			</a>
+						<a target="_top" title="Java 运算符" href="http://www.runoob.com/java/java-operators.html">
+
+			Java 运算符			</a>
+						<a target="_top" title="Java 循环结构 – for, while 及 do…while" href="http://www.runoob.com/java/java-loop.html">
+
+			Java 循环结构			</a>
+						<a target="_top" title="Java 分支结构 – if…else/switch" href="http://www.runoob.com/java/java-if-else-switch.html">
+
+			Java 分支结构			</a>
+						<a target="_top" title="Java Number &amp; Math 类" href="http://www.runoob.com/java/java-number.html">
+
+			Java Number &amp; Math 类			</a>
+						<a target="_top" title="Java Character 类" href="http://www.runoob.com/java/java-character.html">
+
+			Java Character 类			</a>
+						<a target="_top" title="Java String 类" href="http://www.runoob.com/java/java-string.html">
+
+			Java String 类			</a>
+						<a target="_top" title="Java StringBuffer 和 StringBuilder 类" href="http://www.runoob.com/java/java-stringbuffer.html">
+
+			Java StringBuffer			</a>
+						<a target="_top" title="Java 数组" href="http://www.runoob.com/java/java-array.html">
+
+			Java 数组			</a>
+						<a target="_top" title="Java 日期时间" href="http://www.runoob.com/java/java-date-time.html">
+
+			Java 日期时间			</a>
+						<a target="_top" title="Java 正则表达式" href="http://www.runoob.com/java/java-regular-expressions.html">
+
+			Java 正则表达式			</a>
+						<a target="_top" title="Java 方法" href="http://www.runoob.com/java/java-methods.html">
+
+			Java 方法			</a>
+						<a target="_top" title="Java 流(Stream)、文件(File)和IO" href="http://www.runoob.com/java/java-files-io.html" style="background-color: rgb(150, 185, 125); font-weight: bold; color: rgb(255, 255, 255);">
+
+			Java Stream、File、IO			</a>
+			<a target="_top" title="Java Scanner 类" href="http://www.runoob.com/java/java-scanner-class..html"> Java Scanner 类 </a>			<a target="_top" title="Java 异常处理" href="http://www.runoob.com/java/java-exceptions.html">
+
+			Java 异常处理			</a>
+			<br><h2 class="left">Java <span class="left_h2">面向对象</span></h2>			<a target="_top" title="Java 继承" href="http://www.runoob.com/java/java-inheritance.html">
+
+			Java 继承			</a>
+						<a target="_top" title="Java 重写(Override)与重载(Overload)" href="http://www.runoob.com/java/java-override-overload.html">
+
+			Java Override/Overload			</a>
+						<a target="_top" title="Java 多态" href="http://www.runoob.com/java/java-polymorphism.html">
+
+			Java 多态			</a>
+						<a target="_top" title="Java 抽象类" href="http://www.runoob.com/java/java-abstraction.html">
+
+			Java 抽象类			</a>
+						<a target="_top" title="Java 封装" href="http://www.runoob.com/java/java-encapsulation.html">
+
+			Java 封装			</a>
+						<a target="_top" title="Java 接口" href="http://www.runoob.com/java/java-interfaces.html">
+
+			Java 接口			</a>
+						<a target="_top" title="Java 包(package)" href="http://www.runoob.com/java/java-package.html">
+
+			Java 包(package)			</a>
+			<br><h2 class="left">Java <span class="left_h2">高级教程</span></h2>			<a target="_top" title="Java 数据结构" href="http://www.runoob.com/java/java-data-structures.html">
+
+			Java 数据结构			</a>
+						<a target="_top" title="Java 集合框架" href="http://www.runoob.com/java/java-collections.html">
+
+			Java 集合框架			</a>
+						<a target="_top" title="Java 泛型" href="http://www.runoob.com/java/java-generics.html">
+
+			Java 泛型			</a>
+						<a target="_top" title="Java 序列化" href="http://www.runoob.com/java/java-serialization.html">
+
+			Java 序列化			</a>
+						<a target="_top" title="Java 网络编程" href="http://www.runoob.com/java/java-networking.html">
+
+			Java 网络编程			</a>
+						<a target="_top" title="Java 发送邮件" href="http://www.runoob.com/java/java-sending-email.html">
+
+			Java 发送邮件			</a>
+						<a target="_top" title="Java 多线程编程" href="http://www.runoob.com/java/java-multithreading.html">
+
+			Java 多线程编程			</a>
+						<a target="_top" title="Java Applet 基础" href="http://www.runoob.com/java/java-applet-basics.html">
+
+			Java Applet 基础			</a>
+						<a target="_top" title="Java 文档注释" href="http://www.runoob.com/java/java-documentation.html">
+
+			Java 文档注释			</a>
+						<a target="_top" title="Java 实例" href="http://www.runoob.com/java/java-examples.html">
+
+			Java 实例			</a>
+						<a target="_top" title="Java 8  新特性" href="http://www.runoob.com/java/java8-new-features.html">
+
+			Java 8  新特性			</a>
+						<a target="_top" title="Java MySQL 连接" href="http://www.runoob.com/java/java-mysql-connect.html">
+
+			Java MySQL 连接			</a>
+				
+		</div>
+	</div>	
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+			<div class="article-heading-ad" style="display: none;">
+		
+		</div>
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size: 16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="http://www.runoob.com/java/java-methods.html" rel="prev" title="Java 方法">Java 方法</a> </div>
+			<div class="next-design-link"><a href="http://www.runoob.com/java/java-scanner-class..html" rel="next" title="Java Scanner 类">Java Scanner 类</a> <i style="font-size: 16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>Java 流(Stream)、文件(File)和IO</h1>
+<p>Java.io 包几乎包含了所有操作输入、输出需要的类。所有这些流类代表了输入源和输出目标。
+</p><p>Java.io 包中的流支持很多种格式，比如：基本类型、对象、本地化字符集等等。
+</p><p>一个流可以理解为一个数据的序列。输入流表示从一个源读取数据，输出流表示向一个目标写数据。
+</p><p>Java 为 I/O 提供了强大的而灵活的支持，使其更广泛地应用到文件传输和网络编程中。
+</p><p>但本节讲述最基本的和流与 I/O 相关的功能。我们将通过一个个例子来学习这些功能。
+</p><hr><h2>读取控制台输入</h2>
+
+<p>
+
+Java 的控制台输入由 System.in 完成。
+</p><p>为了获得一个绑定到控制台的字符流，你可以把 System.in 包装在一个 BufferedReader 对象中来创建一个字符流。
+</p><p>下面是创建 BufferedReader 的基本语法：</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">BufferedReader</span><span class="hl-code"> </span><span class="hl-identifier">br</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">BufferedReader</span><span class="hl-brackets">(</span><span class="hl-reserved">new</span><span class="hl-code"> 
+                      </span><span class="hl-identifier">InputStreamReader</span><span class="hl-brackets">(</span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">in</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;</span></div>
+</div>
+</div>
+<p>BufferedReader 对象创建后，我们便可以使用 read() 方法从控制台读取一个字符，或者用 readLine() 方法读取一个字符串。
+</p><hr><h2>从控制台读取多字符输入</h2>
+<p>
+
+从 BufferedReader 对象读取一个字符要使用 read() 方法，它的语法如下：
+</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">read</span><span class="hl-brackets">(</span><span class="hl-code"> </span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-reserved">throws</span><span class="hl-code"> </span><span class="hl-identifier">IOException</span></div>
+</div>
+</div>
+<p>每次调用 read() 方法，它从输入流读取一个字符并把该字符作为整数值返回。 当流结束的时候返回 -1。该方法抛出 IOException。
+</p><p>下面的程序示范了用 read() 方法从控制台不断读取字符直到用户输入 "q"。</p>
+<div class="example">
+<h2 class="example">BRRead.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-comment">//</span><span class="hl-comment"> 使用 BufferedReader 在控制台读取字符</span><span class="hl-comment"></span><span class="hl-code">
+ 
+</span><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.*;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">BRRead</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-reserved">throws</span><span class="hl-code"> </span><span class="hl-identifier">IOException</span><span class="hl-code">
+  </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-types">char</span><span class="hl-code"> </span><span class="hl-identifier">c</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 使用 System.in 创建 BufferedReader </span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-identifier">BufferedReader</span><span class="hl-code"> </span><span class="hl-identifier">br</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">BufferedReader</span><span class="hl-brackets">(</span><span class="hl-reserved">new</span><span class="hl-code"> 
+                       </span><span class="hl-identifier">InputStreamReader</span><span class="hl-brackets">(</span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">in</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">输入字符, 按下 'q' 键退出。</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 读取字符</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-reserved">do</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+       </span><span class="hl-identifier">c</span><span class="hl-code"> = </span><span class="hl-brackets">(</span><span class="hl-types">char</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-identifier">br</span><span class="hl-code">.</span><span class="hl-identifier">read</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+       </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">c</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">while</span><span class="hl-brackets">(</span><span class="hl-identifier">c</span><span class="hl-code"> != </span><span class="hl-quotes">'</span><span class="hl-string">q</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>以上实例编译运行结果如下:</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">输入字符,</span><span class="pln"> </span><span class="pun">按下</span><span class="pln"> </span><span class="str">'q'</span><span class="pln"> </span><span class="pun">键退出。</span><span class="pln">
+
+runoob
+r
+u
+n
+o
+o
+b
+
+
+q
+q</span></pre>
+<hr><h2>从控制台读取字符串</h2>
+<p>
+
+从标准输入读取一个字符串需要使用 BufferedReader 的 readLine() 方法。
+</p><p>它的一般格式是：
+</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">readLine</span><span class="hl-brackets">(</span><span class="hl-code"> </span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-reserved">throws</span><span class="hl-code"> </span><span class="hl-identifier">IOException</span></div>
+</div>
+</div>
+<p>
+
+下面的程序读取和显示字符行直到你输入了单词"end"。
+</p>
+<div class="example">
+<h2 class="example">BRReadLines.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-comment">//</span><span class="hl-comment"> 使用 BufferedReader 在控制台读取字符</span><span class="hl-comment"></span><span class="hl-code">
+</span><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.*;
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">BRReadLines</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-reserved">throws</span><span class="hl-code"> </span><span class="hl-identifier">IOException</span><span class="hl-code">
+  </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 使用 System.in 创建 BufferedReader </span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-identifier">BufferedReader</span><span class="hl-code"> </span><span class="hl-identifier">br</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">BufferedReader</span><span class="hl-brackets">(</span><span class="hl-reserved">new</span><span class="hl-code">
+                            </span><span class="hl-identifier">InputStreamReader</span><span class="hl-brackets">(</span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">in</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">str</span><span class="hl-code">;
+    </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">Enter lines of text.</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">Enter 'end' to quit.</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-reserved">do</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+       </span><span class="hl-identifier">str</span><span class="hl-code"> = </span><span class="hl-identifier">br</span><span class="hl-code">.</span><span class="hl-identifier">readLine</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+       </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">str</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">while</span><span class="hl-brackets">(</span><span class="hl-code">!</span><span class="hl-identifier">str</span><span class="hl-code">.</span><span class="hl-identifier">equals</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">end</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>以上实例编译运行结果如下:</p>
+<pre class="prettyprint prettyprinted" style=""><span class="typ">Enter</span><span class="pln"> lines of text</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">Enter</span><span class="pln"> </span><span class="str">'end'</span><span class="pln"> to quit</span><span class="pun">.</span><span class="pln">
+</span><span class="typ">This</span><span class="pln"> </span><span class="kwd">is</span><span class="pln"> line one
+</span><span class="typ">This</span><span class="pln"> </span><span class="kwd">is</span><span class="pln"> line one
+</span><span class="typ">This</span><span class="pln"> </span><span class="kwd">is</span><span class="pln"> line two
+</span><span class="typ">This</span><span class="pln"> </span><span class="kwd">is</span><span class="pln"> line two
+</span><span class="kwd">end</span><span class="pln">
+</span><span class="kwd">end</span></pre>
+<blockquote>
+<p>JDK 5 后的版本我们也可以使用 <a href="http://www.runoob.com/java/java-scanner-class.html" target="_top">Java Scanner</a> 类来获取控制台的输入。</p></blockquote>
+
+
+<h2>控制台输出</h2>
+<p>
+
+在此前已经介绍过，控制台的输出由 print( ) 和 println() 完成。这些方法都由类 PrintStream 定义，System.out 是该类对象的一个引用。
+</p><p>PrintStream 继承了 OutputStream类，并且实现了方法 write()。这样，write() 也可以用来往控制台写操作。
+</p><p>PrintStream 定义 write() 的最简单格式如下所示：</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">write</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">byteval</span><span class="hl-brackets">)</span></div>
+</div>
+</div>
+<p>该方法将 byteval 的低八位字节写到流中。
+</p>
+<h3>实例</h3>
+<p>
+
+下面的例子用 write() 把字符 "A" 和紧跟着的换行符输出到屏幕：
+</p>
+<div class="example">
+<h2 class="example">WriteDemo.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.*;
+ 
+</span><span class="hl-comment">//</span><span class="hl-comment"> 演示 System.out.write().</span><span class="hl-comment"></span><span class="hl-code">
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">WriteDemo</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">b</span><span class="hl-code">; 
+      </span><span class="hl-identifier">b</span><span class="hl-code"> = </span><span class="hl-quotes">'</span><span class="hl-string">A</span><span class="hl-quotes">'</span><span class="hl-code">;
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">write</span><span class="hl-brackets">(</span><span class="hl-identifier">b</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">write</span><span class="hl-brackets">(</span><span class="hl-quotes">'</span><span class="hl-special">\n</span><span class="hl-quotes">'</span><span class="hl-brackets">)</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>运行以上实例在输出窗口输出 "A" 字符</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pln">A</span></pre>
+<p><strong>注意：</strong>write() 方法不经常使用，因为 print() 和 println() 方法用起来更为方便。
+</p>
+<hr><h2>读写文件</h2>
+<p>
+
+如前所述，一个流被定义为一个数据序列。输入流用于从源读取数据，输出流用于向目标写数据。
+</p><p>下图是一个描述输入流和输出流的类层次图。</p>
+<p>
+<img src="iostream2.png"></p>
+<p>下面将要讨论的两个重要的流是 FileInputStream 和 FileOutputStream：
+</p><hr>
+<h2>FileInputStream</h2>
+<p>该流用于从文件读取数据，它的对象可以用关键字 new 来创建。
+</p><p>有多种构造方法可用来创建对象。
+</p><p>可以使用字符串类型的文件名来创建一个输入流对象来读取文件：</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">InputStream</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileInputStream</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">C:/java/hello</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;</span></div>
+</div>
+</div>
+<p>也可以使用一个文件对象来创建一个输入流对象来读取文件。我们首先得使用 File() 方法来创建一个文件对象：
+</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">C:/java/hello</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">InputStream</span><span class="hl-code"> </span><span class="hl-identifier">out</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileInputStream</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-brackets">)</span><span class="hl-code">;</span></div>
+</div>
+</div>
+<p>创建了InputStream对象，就可以使用下面的方法来读取流或者进行其他的流操作。</p>
+<table class="reference">
+	<tbody>
+		<tr>
+			<th style="width: 44px;">
+				<strong>序号</strong></th>
+			<th style="width: 533px;">
+				<strong>方法及描述</strong></th>
+		</tr>
+		<tr>
+			<td style="width: 44px;">
+
+				1</td>
+			<td style="width: 533px;">
+				<strong>public void close() throws IOException{}</strong><br>
+				关闭此文件输入流并释放与此流有关的所有系统资源。抛出IOException异常。</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">
+
+				2</td>
+			<td style="width: 533px;">
+				<strong>protected void finalize()throws IOException {}</strong><br>
+				这个方法清除与该文件的连接。确保在不再引用文件输入流时调用其 close 方法。抛出IOException异常。</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">
+
+				3</td>
+			<td style="width: 533px;">
+				<strong>public int read(int r)throws IOException{}</strong><br>
+				这个方法从 InputStream 对象读取指定字节的数据。返回为整数值。返回下一字节数据，如果已经到结尾则返回-1。</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">
+
+				4</td>
+			<td style="width: 533px;">
+				<strong>public int read(byte[] r) throws IOException{}</strong><br>
+				这个方法从输入流读取r.length长度的字节。返回读取的字节数。如果是文件结尾则返回-1。</td>
+		</tr>
+		<tr>
+			<td style="width: 44px;">
+
+				5</td>
+			<td style="width: 533px;">
+				<strong>public int available() throws IOException{}</strong><br>
+				返回下一次对此输入流调用的方法可以不受阻塞地从此输入流读取的字节数。返回一个整数值。</td>
+		</tr>
+	</tbody>
+</table>
+<p>除了 InputStream 外，还有一些其他的输入流，更多的细节参考下面链接：</p>
+<ul>
+<li>
+<a href="http://www.runoob.com/java/java-bytearrayinputstream.html" target="_top">ByteArrayInputStream</a></li><li>
+<a href="http://www.runoob.com/java/java-datainputstream.html" target="_top">DataInputStream</a></li>
+</ul>
+<hr><h2>
+
+FileOutputStream</h2><p>
+
+该类用来创建一个文件并向文件中写数据。</p><p>
+
+如果该流在打开文件进行输出前，目标文件不存在，那么该流会创建该文件。</p><p>
+
+有两个构造方法可以用来创建 FileOutputStream 对象。</p><p>
+
+使用字符串类型的文件名来创建一个输出流对象：</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">OutputStream</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileOutputStream</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">C:/java/hello</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span></div>
+</div>
+</div>
+<p>也可以使用一个文件对象来创建一个输出流来写文件。我们首先得使用File()方法来创建一个文件对象：
+</p>
+<div class="example">
+<div class="example_code">
+<div class="hl-main"><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">C:/java/hello</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-identifier">OutputStream</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileOutputStream</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-brackets">)</span><span class="hl-code">;</span></div>
+</div>
+</div>
+<p>
+
+创建OutputStream 对象完成后，就可以使用下面的方法来写入流或者进行其他的流操作。
+</p>
+<table class="reference">
+	<tbody>
+		<tr>
+			<th style="width: 47px;">
+				<strong>序号</strong></th>
+			<th style="width: 529px;">
+				<strong>方法及描述</strong></th>
+		</tr>
+		<tr>
+			<td style="width: 47px;">
+
+				1</td>
+			<td style="width: 529px;">
+				<strong>public void close() throws IOException{}</strong><br>
+				关闭此文件输入流并释放与此流有关的所有系统资源。抛出IOException异常。</td>
+		</tr>
+		<tr>
+			<td style="width: 47px;">
+
+				2</td>
+			<td style="width: 529px;">
+				<strong>protected void finalize()throws IOException {}</strong><br>
+				这个方法清除与该文件的连接。确保在不再引用文件输入流时调用其 close 方法。抛出IOException异常。</td>
+		</tr>
+		<tr>
+			<td style="width: 47px;">
+
+				3</td>
+			<td style="width: 529px;">
+				<strong>public void write(int w)throws IOException{}</strong><br>
+				这个方法把指定的字节写到输出流中。</td>
+		</tr>
+		<tr>
+			<td style="width: 47px;">
+
+				4</td>
+			<td style="width: 529px;">
+				<strong>public void write(byte[] w)</strong><br>
+				把指定数组中w.length长度的字节写到OutputStream中。</td>
+		</tr>
+	</tbody>
+</table>
+<p>除了OutputStream外，还有一些其他的输出流，更多的细节参考下面链接：</p>
+<ul>
+<li>
+<a href="http://www.runoob.com/java/java-bytearrayoutputstream.html" target="_top">ByteArrayOutputStream</a></li><li>
+<a href="http://www.runoob.com/java/java-dataoutputstream.html" target="_top">DataOutputStream</a></li></ul>
+<h3>实例</h3>
+<p>
+
+下面是一个演示 InputStream 和 OutputStream 用法的例子：
+</p>
+<div class="example">
+<h2 class="example">fileStreamTest.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.*;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">fileStreamTest</span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-reserved">try</span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-types">byte</span><span class="hl-code"> </span><span class="hl-identifier">bWrite</span><span class="hl-code"> </span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> = </span><span class="hl-brackets">{</span><span class="hl-number">11</span><span class="hl-code">,</span><span class="hl-number">21</span><span class="hl-code">,</span><span class="hl-number">3</span><span class="hl-code">,</span><span class="hl-number">40</span><span class="hl-code">,</span><span class="hl-number">5</span><span class="hl-brackets">}</span><span class="hl-code">;
+      </span><span class="hl-identifier">OutputStream</span><span class="hl-code"> </span><span class="hl-identifier">os</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileOutputStream</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">test.txt</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">x</span><span class="hl-code">=</span><span class="hl-number">0</span><span class="hl-code">; </span><span class="hl-identifier">x</span><span class="hl-code"> &lt; </span><span class="hl-identifier">bWrite</span><span class="hl-code">.</span><span class="hl-identifier">length</span><span class="hl-code"> ; </span><span class="hl-identifier">x</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">os</span><span class="hl-code">.</span><span class="hl-identifier">write</span><span class="hl-brackets">(</span><span class="hl-code"> </span><span class="hl-identifier">bWrite</span><span class="hl-brackets">[</span><span class="hl-identifier">x</span><span class="hl-brackets">]</span><span class="hl-code"> </span><span class="hl-brackets">)</span><span class="hl-code">; </span><span class="hl-comment">//</span><span class="hl-comment"> writes the bytes</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+    </span><span class="hl-identifier">os</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+    </span><span class="hl-identifier">InputStream</span><span class="hl-code"> </span><span class="hl-identifier">is</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileInputStream</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">test.txt</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">size</span><span class="hl-code"> = </span><span class="hl-identifier">is</span><span class="hl-code">.</span><span class="hl-identifier">available</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+    </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">i</span><span class="hl-code">=</span><span class="hl-number">0</span><span class="hl-code">; </span><span class="hl-identifier">i</span><span class="hl-code">&lt; </span><span class="hl-identifier">size</span><span class="hl-code">; </span><span class="hl-identifier">i</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">print</span><span class="hl-brackets">(</span><span class="hl-brackets">(</span><span class="hl-types">char</span><span class="hl-brackets">)</span><span class="hl-identifier">is</span><span class="hl-code">.</span><span class="hl-identifier">read</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code"> + </span><span class="hl-quotes">"</span><span class="hl-string">  </span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+      </span><span class="hl-identifier">is</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-reserved">catch</span><span class="hl-brackets">(</span><span class="hl-identifier">IOException</span><span class="hl-code"> </span><span class="hl-identifier">e</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">print</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">Exception</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code">  
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>上面的程序首先创建文件test.txt，并把给定的数字以二进制形式写进该文件，同时输出到控制台上。
+</p>
+<p>以上代码由于是二进制写入，可能存在乱码，你可以使用以下代码实例来解决乱码问题：</p>
+<div class="example">
+<h2 class="example">fileStreamTest2.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-comment">//</span><span class="hl-comment">文件名 :fileStreamTest2.java</span><span class="hl-comment"></span><span class="hl-code">
+</span><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.*;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">fileStreamTest2</span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-reserved">throws</span><span class="hl-code"> </span><span class="hl-identifier">IOException</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    
+    </span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">a.txt</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">FileOutputStream</span><span class="hl-code"> </span><span class="hl-identifier">fop</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileOutputStream</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 构建FileOutputStream对象,文件不存在会自动新建</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">OutputStreamWriter</span><span class="hl-code"> </span><span class="hl-identifier">writer</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">OutputStreamWriter</span><span class="hl-brackets">(</span><span class="hl-identifier">fop</span><span class="hl-code">, </span><span class="hl-quotes">"</span><span class="hl-string">UTF-8</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 构建OutputStreamWriter对象,参数可以指定编码,默认为操作系统默认编码,windows上是gbk</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">writer</span><span class="hl-code">.</span><span class="hl-identifier">append</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">中文输入</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 写入到缓冲区</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">writer</span><span class="hl-code">.</span><span class="hl-identifier">append</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-special">\r</span><span class="hl-special">\n</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment">换行</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">writer</span><span class="hl-code">.</span><span class="hl-identifier">append</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">English</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 刷新缓存冲,写入到文件,如果下面已经没有写入的内容了,直接close也会写入</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">writer</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment">关闭写入流,同时会把缓冲区内容写入文件,所以上面的注释掉</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">fop</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 关闭输出流,释放系统资源</span><span class="hl-comment"></span><span class="hl-code">
+ 
+    </span><span class="hl-identifier">FileInputStream</span><span class="hl-code"> </span><span class="hl-identifier">fip</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">FileInputStream</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 构建FileInputStream对象</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">InputStreamReader</span><span class="hl-code"> </span><span class="hl-identifier">reader</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">InputStreamReader</span><span class="hl-brackets">(</span><span class="hl-identifier">fip</span><span class="hl-code">, </span><span class="hl-quotes">"</span><span class="hl-string">UTF-8</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 构建InputStreamReader对象,编码与写入相同</span><span class="hl-comment"></span><span class="hl-code">
+ 
+    </span><span class="hl-identifier">StringBuffer</span><span class="hl-code"> </span><span class="hl-identifier">sb</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">StringBuffer</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-reserved">while</span><span class="hl-code"> </span><span class="hl-brackets">(</span><span class="hl-identifier">reader</span><span class="hl-code">.</span><span class="hl-identifier">ready</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">sb</span><span class="hl-code">.</span><span class="hl-identifier">append</span><span class="hl-brackets">(</span><span class="hl-brackets">(</span><span class="hl-types">char</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-identifier">reader</span><span class="hl-code">.</span><span class="hl-identifier">read</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-comment">//</span><span class="hl-comment"> 转成char加到StringBuffer对象中</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+    </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">sb</span><span class="hl-code">.</span><span class="hl-identifier">toString</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">reader</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 关闭读取流</span><span class="hl-comment"></span><span class="hl-code">
+    
+    </span><span class="hl-identifier">fip</span><span class="hl-code">.</span><span class="hl-identifier">close</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 关闭输入流,释放系统资源</span><span class="hl-comment"></span><span class="hl-code">
+ 
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<hr>
+<h2>文件和I/O</h2><p>
+
+还有一些关于文件和I/O的类，我们也需要知道：</p>
+<ul>
+<li>
+<a href="http://www.runoob.com/java/java-file.html" target="_top">File Class(类)</a></li><li>
+<a href="http://www.runoob.com/java/java-filereader.html" target="_top">FileReader Class(类)</a></li><li>
+<a href="http://www.runoob.com/java/java-filewriter.html" target="_top">FileWriter Class(类)</a></li></ul>
+<hr>
+<h2>Java中的目录</h2>
+
+<h3>创建目录：</h3><p>
+
+File类中有两个方法可以用来创建文件夹：</p>
+<ul>
+<li>
+		<strong>mkdir( )</strong>方法创建一个文件夹，成功则返回true，失败则返回false。失败表明File对象指定的路径已经存在，或者由于整个路径还不存在，该文件夹不能被创建。</li>
+	<li>
+		<strong>mkdirs()</strong>方法创建一个文件夹和它的所有父文件夹。</li>
+</ul>
+<p>
+
+下面的例子创建 "/tmp/user/java/bin"文件夹：</p>
+<div class="example">
+<h2 class="example">CreateDir.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.</span><span class="hl-identifier">File</span><span class="hl-code">;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">CreateDir</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">dirname</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string">/tmp/user/java/bin</span><span class="hl-quotes">"</span><span class="hl-code">;
+    </span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">d</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-identifier">dirname</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-comment">//</span><span class="hl-comment"> 现在创建目录</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-identifier">d</span><span class="hl-code">.</span><span class="hl-identifier">mkdirs</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>编译并执行上面代码来创建目录 "/tmp/user/java/bin"。
+</p><p><strong>注意：</strong> Java 在 UNIX 和 Windows 自动按约定分辨文件路径分隔符。如果你在 Windows 版本的 Java 中使用分隔符 (/) ，路径依然能够被正确解析。
+</p><hr>
+<h2>读取目录</h2>
+<p>
+
+一个目录其实就是一个 File 对象，它包含其他文件和文件夹。
+</p><p>如果创建一个 File 对象并且它是一个目录，那么调用 isDirectory() 方法会返回 true。
+</p><p>可以通过调用该对象上的 list() 方法，来提取它包含的文件和文件夹的列表。
+</p><p>下面展示的例子说明如何使用 list() 方法来检查一个文件夹中包含的内容：</p>
+<div class="example">
+<h2 class="example">DirList.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.</span><span class="hl-identifier">File</span><span class="hl-code">;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">DirList</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">dirname</span><span class="hl-code"> = </span><span class="hl-quotes">"</span><span class="hl-string">/tmp</span><span class="hl-quotes">"</span><span class="hl-code">;
+    </span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f1</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-identifier">dirname</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-reserved">if</span><span class="hl-code"> </span><span class="hl-brackets">(</span><span class="hl-identifier">f1</span><span class="hl-code">.</span><span class="hl-identifier">isDirectory</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-code"> </span><span class="hl-quotes">"</span><span class="hl-string">目录 </span><span class="hl-quotes">"</span><span class="hl-code"> + </span><span class="hl-identifier">dirname</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">s</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> = </span><span class="hl-identifier">f1</span><span class="hl-code">.</span><span class="hl-identifier">list</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-reserved">for</span><span class="hl-code"> </span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">i</span><span class="hl-code">=</span><span class="hl-number">0</span><span class="hl-code">; </span><span class="hl-identifier">i</span><span class="hl-code"> &lt; </span><span class="hl-identifier">s</span><span class="hl-code">.</span><span class="hl-identifier">length</span><span class="hl-code">; </span><span class="hl-identifier">i</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+        </span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-identifier">dirname</span><span class="hl-code"> + </span><span class="hl-quotes">"</span><span class="hl-string">/</span><span class="hl-quotes">"</span><span class="hl-code"> + </span><span class="hl-identifier">s</span><span class="hl-brackets">[</span><span class="hl-identifier">i</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-reserved">if</span><span class="hl-code"> </span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-code">.</span><span class="hl-identifier">isDirectory</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+          </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">s</span><span class="hl-brackets">[</span><span class="hl-identifier">i</span><span class="hl-brackets">]</span><span class="hl-code"> + </span><span class="hl-quotes">"</span><span class="hl-string"> 是一个目录</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+          </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">s</span><span class="hl-brackets">[</span><span class="hl-identifier">i</span><span class="hl-brackets">]</span><span class="hl-code"> + </span><span class="hl-quotes">"</span><span class="hl-string"> 是一个文件</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span><span class="hl-code">
+      </span><span class="hl-brackets">}</span><span class="hl-code">
+    </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-identifier">dirname</span><span class="hl-code"> + </span><span class="hl-quotes">"</span><span class="hl-string"> 不是一个目录</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+<p>以上实例编译运行结果如下：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="pun">目录</span><span class="pln"> </span><span class="pun">/</span><span class="pln">tmp
+bin </span><span class="pun">是一个目录</span><span class="pln">
+
+lib </span><span class="pun">是一个目录</span><span class="pln">
+
+demo </span><span class="pun">是一个目录</span><span class="pln">
+
+test</span><span class="pun">.</span><span class="pln">txt </span><span class="pun">是一个文件</span><span class="pln">
+
+README </span><span class="pun">是一个文件</span><span class="pln">
+
+index</span><span class="pun">.</span><span class="pln">html </span><span class="pun">是一个文件</span><span class="pln">
+
+include </span><span class="pun">是一个目录</span></pre>
+<hr>
+<h2>删除目录或文件</h2>
+<p>删除文件可以使用  <strong>java.io.File.delete()</strong> 方法。</p>
+<p>以下代码会删除目录/tmp/java/，即便目录不为空。</p>
+<p>测试目录结构：</p>
+<pre class="prettyprint prettyprinted" style=""><span class="str">/tmp/</span><span class="pln">java</span><span class="pun">/</span><span class="pln">
+</span><span class="pun">|--</span><span class="pln"> </span><span class="lit">1.log</span><span class="pln">
+</span><span class="pun">|--</span><span class="pln"> test</span></pre>
+<div class="example">
+<h2 class="example">DeleteFileDemo.java 文件代码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">import</span><span class="hl-code"> </span><span class="hl-identifier">java</span><span class="hl-code">.</span><span class="hl-identifier">io</span><span class="hl-code">.</span><span class="hl-identifier">File</span><span class="hl-code">;
+ 
+</span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">DeleteFileDemo</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-comment">//</span><span class="hl-comment"> 这里修改为自己的测试目录</span><span class="hl-comment"></span><span class="hl-code">
+    </span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">folder</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">File</span><span class="hl-brackets">(</span><span class="hl-quotes">"</span><span class="hl-string">/tmp/java/</span><span class="hl-quotes">"</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-identifier">deleteFolder</span><span class="hl-brackets">(</span><span class="hl-identifier">folder</span><span class="hl-brackets">)</span><span class="hl-code">;
+  </span><span class="hl-brackets">}</span><span class="hl-code">
+ 
+  </span><span class="hl-comment">//</span><span class="hl-comment">删除文件及目录</span><span class="hl-comment"></span><span class="hl-code">
+  </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">deleteFolder</span><span class="hl-brackets">(</span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">folder</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-identifier">File</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> </span><span class="hl-identifier">files</span><span class="hl-code"> = </span><span class="hl-identifier">folder</span><span class="hl-code">.</span><span class="hl-identifier">listFiles</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">files</span><span class="hl-code">!=</span><span class="hl-reserved">null</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code"> 
+            </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-identifier">File</span><span class="hl-code"> </span><span class="hl-identifier">f</span><span class="hl-code">: </span><span class="hl-identifier">files</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+                </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-code">.</span><span class="hl-identifier">isDirectory</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+                    </span><span class="hl-identifier">deleteFolder</span><span class="hl-brackets">(</span><span class="hl-identifier">f</span><span class="hl-brackets">)</span><span class="hl-code">;
+                </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+                    </span><span class="hl-identifier">f</span><span class="hl-code">.</span><span class="hl-identifier">delete</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+                </span><span class="hl-brackets">}</span><span class="hl-code">
+            </span><span class="hl-brackets">}</span><span class="hl-code">
+        </span><span class="hl-brackets">}</span><span class="hl-code">
+        </span><span class="hl-identifier">folder</span><span class="hl-code">.</span><span class="hl-identifier">delete</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>			
+			
+			</div>
+		</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size: 16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="http://www.runoob.com/java/java-methods.html" rel="prev" title="Java 方法">Java 方法</a> </div>
+			<div class="next-design-link"><a href="http://www.runoob.com/java/java-scanner-class..html" rel="next" title="Java Scanner 类">Java Scanner 类</a> <i style="font-size: 16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+		<!-- 笔记列表 -->
+		
+
+
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style="">
+	<h3 class="text-muted" id="share_code"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<input name="is_user_logged_in" id="is_user_logged_in" value="0" type="hidden">
+	<p style="font-size: 14px;">笔记需要是本篇文章的内容扩展！</p>
+	<p style="font-size: 14px;"><a href="http://www.runoob.com/w3cnote/runoob-user-test-intro.html#invite" target="_top">注册邀请码获取方式</a></p>
+		<!--<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="http://www.runoob.com/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display: none;"><div id="comment-status"></div><div id="comment-status"></div>
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size: 36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div class="simditor">
+  <div class="simditor-wrapper"><div class="simditor-toolbar" style="top: 0px;"><ul><li><a tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-bold" href="javascript:;" title="加粗文字 ( Ctrl + b )"><span class="simditor-icon simditor-icon-bold"></span></a></li><li><a tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-code" href="javascript:;" title="插入代码"><span class="simditor-icon simditor-icon-code"></span></a></li><li><a tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-ul" href="javascript:;" title="无序列表 ( Ctrl + . )"><span class="simditor-icon simditor-icon-list-ul"></span></a></li><li><a tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-ol" href="javascript:;" title="有序列表 ( ctrl + / )"><span class="simditor-icon simditor-icon-list-ol"></span></a></li><li><a tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-image" href="javascript:;" title="插入图片"><span class="simditor-icon simditor-icon-picture-o"></span></a></li></ul></div>
+    <div class="simditor-placeholder" style="display: block;">写笔记...</div>
+    <div class="simditor-body" contenteditable="true"><p><br></p></div>
+  <div class="simditor">
+  <div class="simditor-wrapper"><div style="top: 0px;" class="simditor-toolbar"><ul><li><a title="加粗文字 ( Ctrl + b )" tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-bold" href="javascript:;"><span class="simditor-icon simditor-icon-bold"></span></a></li><li><a title="插入代码" tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-code" href="javascript:;"><span class="simditor-icon simditor-icon-code"></span></a></li><li><a title="无序列表 ( Ctrl + . )" tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-ul" href="javascript:;"><span class="simditor-icon simditor-icon-list-ul"></span></a></li><li><a title="有序列表 ( ctrl + / )" tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-ol" href="javascript:;"><span class="simditor-icon simditor-icon-list-ol"></span></a></li><li><a title="插入图片" tabindex="-1" unselectable="on" class="toolbar-item toolbar-item-image" href="javascript:;"><span class="simditor-icon simditor-icon-picture-o"></span></a></li></ul></div>
+    <div style="display: block;" class="simditor-placeholder">写笔记...</div>
+    <div class="simditor-body" contenteditable="true"><p><br></p></div>
+  <div id="mded"></div></div>
+<div class="simditor-popover code-popover"><div class="code-settings">
+  <div class="settings-field">
+    <select class="select-lang">
+      <option value="-1">选择程序语言</option>
+    <option value="bash">Bash</option><option value="c++">C++</option><option value="cs">C#</option><option value="css">CSS</option><option value="erlang">Erlang</option><option value="less">Less</option><option value="sass">Sass</option><option value="diff">Diff</option><option value="coffeescript">CoffeeScript</option><option value="html">HTML,XML</option><option value="json">JSON</option><option value="java">Java</option><option value="js">JavaScript</option><option value="markdown">Markdown</option><option value="oc">Objective C</option><option value="php">PHP</option><option value="parl">Perl</option><option value="python">Python</option><option value="ruby">Ruby</option><option value="sql">SQL</option></select>
+  </div>
+</div></div><div class="simditor-popover image-popover"><div class="link-settings">
+  <div class="settings-field">
+    <label>图片地址</label>
+    <input class="image-src" tabindex="1" type="text">
+    
+  </div>
+  <div class="settings-field">
+    <label>图片描述</label>
+    <input class="image-alt" id="image-alt" tabindex="1" type="text">
+  </div>
+  <div class="settings-field">
+    <label>图片尺寸</label>
+    <input class="image-size" id="image-width" tabindex="2" type="text">
+    <span class="times">×</span>
+    <input class="image-size" id="image-height" tabindex="3" type="text">
+    <a class="btn-restore" href="javascript:;" title="还原图片尺寸" tabindex="-1">
+      <span class="simditor-icon simditor-icon-undo"></span>
+    </a>
+  </div>
+</div></div></div></div>
+<div class="simditor-popover code-popover"><div class="code-settings">
+  <div class="settings-field">
+    <select class="select-lang">
+      <option value="-1">选择程序语言</option>
+    <option value="bash">Bash</option><option value="c++">C++</option><option value="cs">C#</option><option value="css">CSS</option><option value="erlang">Erlang</option><option value="less">Less</option><option value="sass">Sass</option><option value="diff">Diff</option><option value="coffeescript">CoffeeScript</option><option value="html">HTML,XML</option><option value="json">JSON</option><option value="java">Java</option><option value="js">JavaScript</option><option value="markdown">Markdown</option><option value="oc">Objective C</option><option value="php">PHP</option><option value="parl">Perl</option><option value="python">Python</option><option value="ruby">Ruby</option><option value="sql">SQL</option></select>
+  </div>
+</div></div><div class="simditor-popover image-popover"><div class="link-settings">
+  <div class="settings-field">
+    <label>图片地址</label>
+    <input class="image-src" tabindex="1" type="text">
+    
+  </div>
+  <div class="settings-field">
+    <label>图片描述</label>
+    <input class="image-alt" id="image-alt" tabindex="1" type="text">
+  </div>
+  <div class="settings-field">
+    <label>图片尺寸</label>
+    <input class="image-size" id="image-width" tabindex="2" type="text">
+    <span class="times">×</span>
+    <input class="image-size" id="image-height" tabindex="3" type="text">
+    <a class="btn-restore" href="javascript:;" title="还原图片尺寸" tabindex="-1">
+      <span class="simditor-icon simditor-icon-undo"></span>
+    </a>
+  </div>
+</div></div></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input name="comment_post_ID" value="5012" id="comment_post_ID" type="hidden">
+<input name="comment_parent" id="comment_parent" value="0" type="hidden">
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" name="author" id="author" value="" tabindex="2" placeholder="昵称" type="text"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" name="email" id="email" value="" tabindex="3" placeholder="邮箱" type="text"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" name="url" id="url" value="" tabindex="4" placeholder="引用地址" type="text"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload: false,
+	  defaultImage: 'http://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  5012;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>');
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>');
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>');
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>');
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>');
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>');
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+</script>
+
+
+
+<script type="text/javascript" src="module.js"></script>
+<script type="text/javascript" src="hotkeys.js"></script>
+<script type="text/javascript" src="simditor.min.js"></script>		<div class="sidebar-box ad-box ad-box-large">
+		<div class="ad-336280" style="display: none;">
+			
+		</div>
+		</div>
+		
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+<!--
+	<div class="tab tab-light-blue" style="text-align: center;">关注微信</div>
+	<div class="sidebar-box">
+		<a href="http://m.runoob.com/" target="_blank"> <img src="http://www.runoob.com/wp-content/themes/w3cschool.cc/assets/img/qrcode.jpg" alt="移动版"> </a>
+		<div class="qqinfo">
+		 <a target="_blank" href="http://jq.qq.com/?_wv=1027&k=dOwwKN" id="qqhref">
+		<img border="0" src="http://pub.idqqimg.com/wpa/images/group.png" alt="菜鸟家族" title="菜鸟家族"></a>
+		<span>(群号：<span id="qqid">365967760</span>)</span>
+		</div>
+		
+	</div>
+	-->
+
+
+	
+		<div class="sidebar-box ad-box ad-box-large">
+		<div class="sidebar-box advertise-here" style="margin: 0px auto;">
+			<a href="javascript:void(0);" style="font-size: 16px; color: rgb(100, 133, 76); font-weight: bold;"> <i class="fa fa-list" aria-hidden="true"></i>  分类导航</a>
+		</div>
+	<div class="sidebar-box sidebar-cate">
+		
+		<div class="sidebar-tree">
+			<ul><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="http://www.runoob.com/html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="http://www.runoob.com/html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="http://www.runoob.com/css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="http://www.runoob.com/css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Bootstrap3 教程" href="http://www.runoob.com/bootstrap/bootstrap-tutorial.html">Bootstrap3 教程</a></li><li><a title="Bootstrap4 教程" href="http://www.runoob.com/bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Font Awesome 教程" href="http://www.runoob.com/font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="http://www.runoob.com/foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="http://www.runoob.com/js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="http://www.runoob.com/htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="http://www.runoob.com/jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="http://www.runoob.com/angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="http://www.runoob.com/angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="http://www.runoob.com/vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="React 教程" href="http://www.runoob.com/react/react-tutorial.html">React 教程</a></li><li><a title="jQuery UI 教程" href="http://www.runoob.com/jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="http://www.runoob.com/jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="http://www.runoob.com/nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="AJAX 教程" href="http://www.runoob.com/ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="http://www.runoob.com/json/json-tutorial.html">JSON 教程</a></li><li><a title="Highcharts 教程" href="http://www.runoob.com/highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="http://www.runoob.com/googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="PHP 教程" href="http://www.runoob.com/php/php-tutorial.html">PHP 教程</a></li><li><a title="Python 教程" href="http://www.runoob.com/python/python-tutorial.html">Python 教程</a></li><li><a title="Python3 教程" href="http://www.runoob.com/python3/python3-tutorial.html">Python3 教程</a></li><li><a title="Django 教程" href="http://www.runoob.com/django/django-tutorial.html">Django 教程</a></li><li><a title="Linux 教程" href="http://www.runoob.com/linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="http://www.runoob.com/docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="http://www.runoob.com/ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="http://www.runoob.com/java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="http://www.runoob.com/c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="http://www.runoob.com/cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="http://www.runoob.com/perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="http://www.runoob.com/servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="http://www.runoob.com/jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="http://www.runoob.com/lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Scala 教程" href="http://www.runoob.com/scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="http://www.runoob.com/go/go-tutorial.html">Go 教程</a></li><li><a title="设计模式" href="http://www.runoob.com/design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="正则表达式" href="http://www.runoob.com/regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="ASP 教程" href="http://www.runoob.com/asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="http://www.runoob.com/appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="http://www.runoob.com/vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="http://www.runoob.com/sql/sql-tutorial.html">SQL 教程</a></li><li><a title="Mysql 教程" href="http://www.runoob.com/mysql/mysql-tutorial.html">Mysql 教程</a></li><li><a title="SQLite 教程" href="http://www.runoob.com/sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="http://www.runoob.com/mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="http://www.runoob.com/redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="http://www.runoob.com/Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="http://www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="http://www.runoob.com/swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="http://www.runoob.com/jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="http://www.runoob.com/ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Kotlin 教程" href="http://www.runoob.com/kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="http://www.runoob.com/xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="http://www.runoob.com/dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="http://www.runoob.com/dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="http://www.runoob.com/xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="http://www.runoob.com/xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="http://www.runoob.com/xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="http://www.runoob.com/xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="http://www.runoob.com/xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="http://www.runoob.com/schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="http://www.runoob.com/xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="http://www.runoob.com/svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="http://www.runoob.com/aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="http://www.runoob.com/csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="Web Pages 教程" href="http://www.runoob.com/aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="http://www.runoob.com/aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="http://www.runoob.com/aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="http://www.runoob.com/aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="http://www.runoob.com/webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="http://www.runoob.com/wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="http://www.runoob.com/soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="http://www.runoob.com/rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="http://www.runoob.com/rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="Eclipse 教程" href="http://www.runoob.com/eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="http://www.runoob.com/git/git-tutorial.html">Git 教程</a></li><li><a title="Firebug 教程" href="http://www.runoob.com/firebug/firebug-tutorial.html">Firebug 教程</a></li></ul></li><li style="margin: 0px;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="http://www.runoob.com/http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="http://www.runoob.com/web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="http://www.runoob.com/browsers/browser-information.html">浏览器信息</a></li><li><a title="网站主机教程" href="http://www.runoob.com/hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="http://www.runoob.com/tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="http://www.runoob.com/w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="http://www.runoob.com/quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>			</div>
+	
+	</div>
+	</div>
+	<br>
+	
+	<div class="sidebar-box ad-box ad-box-large">
+		<div class="sidebar-box advertise-here">
+			<a href="javascript:void(0);">Advertisement</a>
+		</div>
+		<div class="ad-600160" id="sidebar-right-ads">
+		<script async="" src="adsbygoogle.js"></script>
+		<!-- 侧栏1 -->
+		<ins class="adsbygoogle" style="display: inline-block; width: 160px; height: 600px;" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865" data-adsbygoogle-status="done"><ins id="aswift_0_expand" style="display: inline-table; border: medium none; height: 600px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 160px; background-color: transparent;"><ins id="aswift_0_anchor" style="display: block; border: medium none; height: 600px; margin: 0px; padding: 0px; position: relative; visibility: visible; width: 160px; background-color: transparent;"><iframe src="java-files-io_1.html" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left: 0px; position: absolute; top: 0px; width: 160px; height: 600px;" frameborder="0" height="600" width="160"></iframe></ins></ins></ins>
+		<script>
+
+		(adsbygoogle = window.adsbygoogle || []).push({});
+		</script>
+		</div>
+	</div>
+</div></div>
+
+</div>
+
+<script>
+
+var aid = 5012;
+var uid = 0;
+var url = '/wp-content/themes/runoob/option/user/userinfo.php';
+
+
+$(function() {
+	$.post( url, {aid:aid, action:"collarticle", opt:'init'}, function( data ) {
+  		if(data.error==0) {
+  			$("#content").find("h1:first").append(data.msg);
+  			$(".comment-signarea").hide();
+  			$("#commentform").show();
+  			$("#comment-author-info li:lt(2)").hide();
+  			$("#is_user_logged_in").val(1);
+  			$(".comt-title p:first").html(data.username);
+
+  		} else {
+  			$(".comment-signarea").show();
+  			$("#commentform").hide();
+  			$("#is_user_logged_in").val(0);
+  		}
+	},'json');
+	if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+	    $(".feedback-btn").hide();
+	} else {
+		$(".feedback-btn").show();
+	}
+})
+
+function coll() {
+	$.post( url, {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+  		if(data.error==0) {
+	  		$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+	  		$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+  		}
+  		alert(data.msg);
+	 },'json');
+}
+
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="feedback.js"></script>
+
+<script type="text/javascript">
+
+        $.feedback({
+            ajaxURL: '/feedback/runoob_feedback.php',
+            html2canvasURL: '/wp-content/themes/runoob/assets/feedback/stable/2.0/html2canvas.js'
+        });
+    </script><button style="display: inline-block;" class="feedback-btn feedback-btn-gray">反馈/建议</button><button class="feedback-btn feedback-btn-gray" style="display: inline-block;">反馈/建议</button>
+<!-- 反馈对话框结束 -->
+<button class="feedback-btn feedback-btn-gray" style="display: inline-block;">反馈/建议</button>
+<!-- 底部 -->
+
+
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+
+       在线实例
+      </dt>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+
+       ·<a target="_top" href="http://www.runoob.com/java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+
+      字符集&amp;工具
+      </dt>
+      <dd>
+
+       · <a target="_top" href="http://www.runoob.com/charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+
+       · <a target="_top" href="http://www.runoob.com/tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+
+       · <a target="_top" href="http://www.runoob.com/tags/ref-entities.html">HTML ISO-8859-1</a>
+      </dd> 
+      <dd>
+
+       · <a target="_top" href="http://www.runoob.com/tags/html-symbols.html">HTML 实体符号</a>
+      </dd>
+      <dd>
+
+       · <a target="_top" href="http://www.runoob.com/tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+
+       · <a target="_top" href="http://c.runoob.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+
+       最新更新
+      </dt>
+                   <dd>
+
+       ·
+      <a href="http://www.runoob.com/w3cnote/css-percentage-calculation.html" title="css 中的百分比计算方法">css 中的百分比...</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/w3cnote/cpp-multithread-demo.html" title="C++ 多线程">C++ 多线程</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/w3cnote/cpp-std-thread.html" title="C++ std::thread">C++ std::thread</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/css3/css3-pr-rotation-point.html" title="CSS3 rotation-point">CSS3 rotation-p...</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/w3cnote/python-single-thread-multi-thread-and-multi-process.html" title="Python中单线程、多线程和多进程的效率对比实验">Python中单线程...</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/w3cnote/programmer-joke.html" title="人生不如意事十之八九，90% 是因为没女朋友">人生不如意事十...</a>
+      </dd>
+              <dd>
+
+       ·
+      <a href="http://www.runoob.com/bootstrap4/bootstrap4-utilities.html" title="Bootstrap4 小工具">Bootstrap4 小工具</a>
+      </dd>
+             </dl>
+     <dl>
+      <dt>
+
+       站点信息
+      </dt>
+      <dd>
+
+       ·
+       <a target="_top" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=ssbDyoOAgfLU3crf09venNHd3w" rel="external nofollow">意见反馈</a>
+      </dd>
+      <dd>
+
+       ·
+      <a target="_top" href="http://www.runoob.com/disclaimer">免责声明</a>
+       </dd>
+      <dd>
+
+       ·
+       <a target="_top" href="http://www.runoob.com/aboutus">关于我们</a>
+       </dd>
+      <dd>
+
+       ·
+      <a target="_top" href="http://www.runoob.com/archives">文章归档</a>
+      </dd>
+      
+     </dl>
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+            <img src="qrcode.png" height="128" width="128">
+       </div>
+     </div>
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+
+     Copyright © 2013-2017    <strong><a href="http://www.runoob.com/" target="_top">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="http://www.runoob.com/" target="_top">runoob.com</a></strong> All Rights Reserved. 备案号：闽ICP备15012807号-1
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部"> <i class="fa fa-angle-up"></i></a>
+    <a class="qrcode" href="javascript:void(0)" title="关注我们"><i class="fa fa-qrcode"></i></a>
+    <a class="writer" target="_top" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=ssbDyoOAgfLU3crf09venNHd3w" style="font-size: 12px;" title="Bug 反馈"><i class="fa fa-envelope-o" style="font-size: 20px;"></i></a>
+    <!-- qrcode modal -->
+    <div id="bottom-qrcode" class="modal panel-modal hide fade in">
+      <h4>微信关注</h4>
+      <div class="panel-body"><img alt="微信关注" src="qrcode.png" height="128" width="128"></div> 
+    </div>
+  </div>
+ <div style="display: none;">
+ 
+  <script>
+
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?8e2a116daf0104a78d601f40a45c75b4";
+    var s = document.getElementsByTagName("script")[0]; 
+    s.parentNode.insertBefore(hm, s);
+  })();
+  </script>
+</div>
+<script>
+
+window.jsui={
+    www: '//wwww.runoob.com',
+    uri: '//www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<div class="cd-user-modal"> 
+	<div class="cd-user-modal-container">
+		<ul class="cd-switcher">
+			<li><a href="javascript:;">用户登录</a></li>
+			<li><a href="javascript:;">注册新用户</a></li>
+		</ul>
+
+		<div id="cd-login"> <!-- 登录表单 -->
+			<div class="cd-form">
+				<p class="fieldset">
+					<label class="image-replace cd-username" for="signin-username">用户名</label>
+					<input class="full-width has-padding has-border" id="signin-username" name="username" placeholder="输入用户名" type="text">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signin-password">密码</label>
+					<input class="full-width has-padding has-border" id="signin-password" name="password" placeholder="输入密码" type="password">
+				</p>
+				
+				<p class="fieldset">
+					<input id="remember-me" checked="" type="checkbox">
+					<label for="remember-me">记住登录状态</label>
+          <a href="http://www.runoob.com/reset-password" style="float: right; padding-right: 20px;" target="_top">忘记密码？</a>
+				</p>
+ 				<input name="action" value="signin" type="hidden">
+				<p class="fieldset">
+					<input class="full-width2" value="登 录" type="submit">
+				</p>
+        <div class="err-msg"></div>
+			</div>
+		</div>
+
+		<div id="cd-signup"> <!-- 注册表单 -->
+			<div class="cd-form">
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="verifycode">邀请码</label>
+					<input class="full-width has-padding has-border" id="signup-verifycode" name="verifycode" placeholder="输入邀请码" type="text">
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-username" for="signup-username">用户名</label>
+					<input class="full-width has-padding has-border" id="signup-username" name="name" placeholder="输入用户名" type="text">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-email" for="signup-email">邮箱</label>
+					<input class="full-width has-padding has-border" name="email" id="signup-email" placeholder="输入mail" type="email">
+				</p>
+
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signup-password">密码</label>
+					<input class="full-width has-padding has-border" id="signup-password" name="password" placeholder="输入密码" type="password">
+				</p>
+				<p class="fieldset">
+					<label class="image-replace cd-password" for="signup-password">重复输入密码</label>
+					<input class="full-width has-padding has-border" id="signup-password" name="password2" placeholder="重复输入密码" type="password">
+				</p>
+				
+				<!-- 
+				<p class="fieldset">
+					<input type="checkbox" id="accept-terms">
+					<label for="accept-terms">我已阅读并同意 <a href="javascript:;">用户协议</a></label>
+				</p>
+				 -->
+				 
+				 <input name="action" value="signup" type="hidden">
+				<p class="fieldset">
+					<input class="full-width2" value="注册新用户" type="submit">
+				</p>
+				<p class="fieldset">
+				  <a href="http://www.runoob.com/w3cnote/runoob-user-test-intro.html#invite" target="_top">如何获取邀请码？</a>
+				  </p>
+				<div class="err-msg"></div>
+			</div>
+
+		</div>
+
+		<a href="javascript:;" class="cd-close-form">关闭</a>
+	</div>
+</div> 
+<script src="main.js"></script>
+ 
+
+</body>
+</html>
